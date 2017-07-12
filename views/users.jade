@@ -1,0 +1,21 @@
+extends layout
+block content
+	section(class="event-feature sec-padding pb_60" data-bg-color="#fafafa")
+		div(class="container")
+			div(class="row")
+				-var i;
+				-for(i=0;i<data.length;i++){
+				-var name=data[i].first_name+' '+data[i].last_name;
+				-var email=data[i].email;
+				-var mobile=data[i].mobile;
+				div(class="col-sm-12")
+					div(class="row")
+						div(class="col-sm-6")
+							h3 #{name}
+							h4 #{email}
+							h4 #{mobile}
+						div(class="col-sm-6")
+							div(class="pull-left")
+								-var link='\\deleteUser?email='+email;
+								a(class="thm-btn btn-xs mt_30" href="#{link}") Delete
+				-}

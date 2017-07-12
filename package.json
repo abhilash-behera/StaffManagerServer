@@ -1,0 +1,39 @@
+{
+  "name": "staff-manager-romina",
+  "version": "0.0.1",
+  "description": "The best staff manager app",
+  "engines": {
+    "node": "6.9.4"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "cloudinary": "^1.9.0",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.1",
+    "express": "4.13.3",
+    "express-session": "^1.15.1",
+    "fcm-node": "^1.1.1",
+    "firebase-admin": "^4.2.1",
+    "jade": "^1.11.0",
+    "mongoose": "^4.9.5",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.4.2",
+    "winston": "^2.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "staff",
+    "manager",
+    "ManageStaff",
+	  "StaffManager"
+  ],
+  "license": "MIT"
+}

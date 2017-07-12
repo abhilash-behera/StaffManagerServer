@@ -1,0 +1,26 @@
+extends layout
+block content
+	section(class="event-feature sec-padding pb_60" data-bg-color="#fafafa")
+		div(class="container")
+			div(class="row")
+				div(class="col-sm-12")
+					form(method="post" action="/types" enctype="multipart/form-data")
+						h4 Enter Type Name:
+						input(type="text" name="name")
+						input(type="submit" value="Add Type" class="thm-btn btn-md mt_30")
+			div(class="row")
+				-var i;
+				-for(i=data.length-1;i>=0;i--){
+				-var name=data[i].name;
+				div(class="col-sm-12")
+					div(class="row")
+						div(class="col-sm-6")
+							div(class="row")
+								div(class="col-sm-3")
+									div(class="pull-right")
+										h4 Name: #{name}
+						div(class="col-sm-6")
+							div(class="pull-left")
+							-var link='\\deleteType?name='+name;
+								a(class="thm-btn btn-xs mt_30" href="#{link}") Delete
+				-}

@@ -1,0 +1,42 @@
+extends layout
+block content
+	section(class="event-feature sec-padding pb_60" data-bg-color="#fafafa")
+		div(class="container" style="text-align:right")
+			div(class="row")
+				div(style="text-align:center")
+					div(style="display:inline-block")
+						div(class="single-header-info")
+							a(class="thm-btn btn-xl mt_30" data-toggle="modal" href="/addArticle") Add Article
+							
+			div(class="row" style="margin-top:50px")
+				-var i;
+				-for(i=data.length-1;i>=0;i--){
+				-var title=data[i].title;
+				-var id=data[i].id;
+				-var image=data[i].image;
+				-var text=data[i].text;
+				-var comments=data[i].comments.length;
+				-var likes=data[i].likes.length;
+				-var email=data[i].email;
+				-var time=data[i].time;
+				div(class="col-sm-12 pull-left" style="margin-top:30px")
+					div(class="row")
+						div(class="col-sm-6")
+							h2 Title: #{title}
+							h3 ID: #{id}
+							-if(image){
+								img(src="#{image}" height="30%" width="30%")
+							-}
+							h4 Description: #{text}
+							div(class="row")
+								div(class="col-sm-3")
+									h5 Comments: #{comments}
+								div(class="col-sm-3")
+									h5 Likes: #{likes}
+							h4 Uploaded by: #{email}
+							h4 Time: #{time}
+						div(class="col-sm-6")
+							div(class="pull-left")
+							-var link='\\deleteFeed?id='+id;
+								a(class="thm-btn btn-xs mt_30" href="#{link}") Delete
+				-}

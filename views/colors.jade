@@ -1,0 +1,36 @@
+extends layout
+block content
+	section(class="event-feature sec-padding pb_60" data-bg-color="#fafafa")
+		div(class="container")
+			div(class="row")
+				button(onclick="myFunction()") Click Here To Generate Preview
+					div(id="preview" style="min-height:100px;min-width:100px;max-height:100px;max-width:100px")
+				form(method="post" action="/colors" enctype="multipart/form-data")
+					div(class="col-lg-12")
+						div(class="row")
+							h4(style="color:#000000") Enter hex code:
+							input(type="text" id="hex" name="hex")
+							h4(style="color:#000000") Enter color name:
+							input(type="text" id="name" name="name")
+					div(class="pull-left")
+						input(type="submit" class="thm-btn btn-sm mt_30" value="Add Color")
+			div(class="row" style="margin-top:100px")
+				-var i;
+				-for(i=data.length-1;i>=0;i--){
+				-var name=data[i].name;
+				-var hex=data[i].hex;
+				div(class="col-sm-12")
+					div(class="row")
+						div(class="col-sm-6")
+							div(class="row")
+								div(class="col-sm-3")
+									div(class="pull-right")
+										h4 Name: #{name}
+								div(class="col-sm-3")
+									div(class="pull-right")
+										h4 Hex: #{hex}
+						div(class="col-sm-6")
+							div(class="pull-left")
+							-var link='\\deleteColor?name='+name;
+								a(class="thm-btn btn-xs mt_30" href="#{link}") Delete
+				-}

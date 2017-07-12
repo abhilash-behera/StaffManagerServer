@@ -1,0 +1,33 @@
+doctype html
+html
+	head
+		meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+		title='Your Stylist'
+		meta(name="viewport" content="width=device-width,initial-scale=1")
+		link(rel="stylesheet" href="/stylesheets/responsive.css" type="text/css")
+		link(rel="stylesheet" href="/stylesheets/style.css" type="text/css")
+		link(rel="stylesheet" href="/stylesheets/gridStyle.css" type="text/css")
+		script(src="/js/function.js")
+		script(src="/js/myscript.js")
+		script(src="/js/gridScript.js")
+	body
+		nav(class="mainmenu-area stricky")
+			div(class="container")
+				div(class="navigation pull-left")
+					div(class="nav-header")
+						ul
+							li
+								a(href="/") Home
+							li
+								a(href="/users") Users
+							li
+								a(href="/adminPosts") Posts
+							li
+								a(href="/adminPhotos") Photos
+							li
+								a(href="/adminFeeds") Feeds
+							li
+								a(href="/adminColors") Colors
+							li
+								a(href="/adminTypes") Types
+		block content

@@ -1,0 +1,44 @@
+extends layout
+block content
+	div(class="container" style="text-align:right")
+		form(method="post" action="/feed" style="margin-top:50px" enctype="multipart/form-data")
+			table(style="padding:10px; color:black")
+				tr
+					td(style="padding:10px; font-size:16px;text-align:right") Post Id
+					td
+						-var timestamp=Date.now()/1000|0
+						input(type="text" name="id" readonly="readonly" value="#{timestamp}" style="text-align:center" class="pull-left")
+				tr
+					td(style="padding:10px; font-size:16px;text-align:right") Email
+					td
+						input(class="pull-left" type="text" name="email" readonly="readonly" value="admin@yourStylist.com" style="text-align:center")
+				tr
+					td(style="padding:10px; font-size:16px;text-align:right") Time
+					td
+						-var date=new Date();
+						-var timeString=('0'+date.getDate()).slice(-2)+"/"+('0'+(date.getMonth()+1)).slice(-2)+"/"+date.getFullYear()+" "+('0'+date.getHours()).slice(-2)+":"+('0'+date.getMinutes()).slice(-2)+":"+('0'+date.getSeconds()).slice(-2);
+						input(class="pull-left" type="text" name="time" readonly="readonly" value="#{timeString}" style="text-align:center")
+				tr
+					td(style="padding:10px; font-size:25px;text-align:right") Title
+					td
+						input(class="pull-left" type="text" name="title" style="text-align:center")
+				tr
+					td(style="padding:10px;font-size:25px;text-align:right") Image
+					td
+						input(class="pull-left" type="file" name="data" style="margin-left:20px" accept="image/*")
+				tr
+					td(style="padding:10px;font-size:25px;text-align:right") Text
+					td
+						textarea(class="pull-left" name="text" style="min-height:100px" cols="100")
+				tr
+					td
+					td
+						div(class="row")
+							div(style="text-align:center")
+								div(style="display:inline-block")
+									div(class="single-header-info")
+										input(type="submit" class="thm-btn btn-xl mt_30" name="submit" value="Add Article")
+-function showFileName() {
+-var fil=document.getElementById("image");
+-alert(fil.value);
+-}

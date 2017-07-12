@@ -1,0 +1,35 @@
+extends layout
+block content
+	section(class="event-feature sec-padding pb_60" data-bg-color="#fafafa")
+		div(class="container")
+			div(class="row")
+				-var i;
+				-for(i=0;i<data.length;i++){
+				-var id=data[i].id;
+				-var image=data[i].image;
+				-var text=data[i].text;
+				-var comments=data[i].comments.length;
+				-var likes=data[i].likes.length;
+				-var email=data[i].email;
+				-var name=data[i].name;
+				div(class="col-sm-12")
+					div(class="row")
+						div(class="col-sm-6")
+							h3 #{name}
+							h4 #{email}
+							h4 #{id}
+							-if(image){
+							img(height="30%" width="30%" src="#{image}")
+							-}
+							
+							-if(text){
+							h5 #{text}
+							-}
+							
+							h5 comments: #{comments}
+							h5 likes: #{likes}
+						div(class="col-sm-6")
+							div(class="pull-left")
+							-var link='\\deletePost?id='+id;
+								a(class="thm-btn btn-xs mt_30" href="#{link}") Delete
+				-}
