@@ -11,7 +11,7 @@ var mongoose=require('mongoose');
 var admin=require('firebase-admin');
 var serviceAccount=require('./your-stylist-firebase-adminsdk-co2s5-28a616cee5.json');
 var cloudinary=require('cloudinary');
-var formidable=require('formidable');
+//var formidable=require('formidable');
 
 /*cloudinary.config({ 
   cloud_name: 'dicok2iyc', 
