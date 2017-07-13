@@ -58,7 +58,7 @@ mongoose.connect(mongooseConnectString,function(err,res){
 	}
 });
 
-var admin=new User({
+/*var admin=new User({
 	first_name:"Abhilash",
 	last_name:"Behera",
 	username:"abhilashfancy",
@@ -73,7 +73,7 @@ admin.save(function(err){
 	}else{
 		logger.info('Admin saved successfully');
 	}
-});
+});*/
 
 var app = express();
 // Middlewares
