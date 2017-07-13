@@ -191,7 +191,7 @@ app.post('/createStaff',function(req,res){
 });
 
 app.get('/staffList',function(req,res){
-	User.find({$ne:{type:admin}},{first_name:1,last_name:1,position:1},function(err,users){
+	User.find({type:{$ne:'admin'}},{first_name:1,last_name:1,position:1},function(err,users){
 		if(err){
 			logger.error('Error in getting staff list: '+err);
 			res.status(209).json({success:false,data:'Could not get staff list at this moment. Please try again later.'});
