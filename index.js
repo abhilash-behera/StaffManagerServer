@@ -58,7 +58,7 @@ mongoose.connect(mongooseConnectString,function(err,res){
 	}
 });
 
-/*var admin=new User({
+var admin=new User({
 	first_name:"Abhilash",
 	last_name:"Behera",
 	username:"abhilashfancy",
@@ -73,7 +73,7 @@ admin.save(function(err){
 	}else{
 		logger.info('Admin saved successfully');
 	}
-});*/
+});
 
 var app = express();
 // Middlewares
@@ -191,7 +191,7 @@ app.post('/createStaff',function(req,res){
 });
 
 app.get('/staffList',function(req,res){
-	User.find(function(err,users){
+	User.find({$ne:{type:admin}},{first_name:1,last_name:1,position:1},function(err,users){
 		if(err){
 			logger.error('Error in getting staff list: '+err);
 			res.status(209).json({success:false,data:'Could not get staff list at this moment. Please try again later.'});
@@ -214,6 +214,7 @@ app.post('/usernameAvailability',function(req,res){
 		}
 	});
 });
+
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
