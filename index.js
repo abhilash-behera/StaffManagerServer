@@ -11,19 +11,7 @@ var mongoose=require('mongoose');
 var admin=require('firebase-admin');
 var serviceAccount=require('./your-stylist-firebase-adminsdk-co2s5-28a616cee5.json');
 var cloudinary=require('cloudinary');
-//var formidable=require('formidable');
 
-/*cloudinary.config({ 
-  cloud_name: 'dicok2iyc', 
-  api_key: '754425519346322', 
-  api_secret: '7FRjnGkuSGmrwMBej_aM91tTzfg' 
-});*/
-
-cloudinary.config({
-	cloud_name:'https-your-stylist-herokuapp-com',
-	api_key:'519976319518278',
-	api_secret:'zHFp0qxZQL2PX5zqKHb9HVDLQwc'
-});
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -46,6 +34,15 @@ var userSchema = new mongoose.Schema({
 });
 
 var User=mongoose.model('User',userSchema);
+
+var taskSchema=new mongoose.Schema({
+	task_name:{type:String},
+	video_path:{type:String},
+	task_duration:{type:String},
+	notification_duration:{type:String}
+});
+
+var Task=mongoose.model('Task',taskSchema);
 
 var mongooseConnectString='mongodb://heroku_5z6k8h5w:cqg39dnk1u9vf6kohv2ooki2u3@ds143892.mlab.com:43892/heroku_5z6k8h5w';
 //var mongooseConnectString='mongodb://127.0.0.1:27017/staff-manager-romina';
@@ -215,6 +212,24 @@ app.post('/usernameAvailability',function(req,res){
 	});
 });
 
+app.post('/createTask',function(req,res){
+	var task=new Task({
+		task_name:req.body.task_name,
+		video_path:req.body.video_path,
+		task_duration:req.body.task_duration,
+		notification_duration:req.body.notification_duration
+	});
+
+	task.save(function(err){
+		if(err){
+			console.log('Error in saving task: '+err);
+			return res.json({success:false,data:'Task was not created. Please try again.'});
+		}else{
+			console.log('Task created Successfully: '+task);
+			return res.json({success:true,data:'Task created successfully.'});
+		}
+	});
+});
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
