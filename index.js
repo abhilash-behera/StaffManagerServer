@@ -39,6 +39,8 @@ var taskSchema = new mongoose.Schema({
     task_name: { type: String },
     video_url: { type: String },
     task_duration: { type: String },
+    task_status: { type: String },
+    assigned_to: { type: String },
     notification_duration: { type: String }
 });
 
@@ -223,6 +225,18 @@ app.post('/createTask', function(req, res) {
         } else {
             console.log('Task created Successfully: ' + task);
             return res.json({ success: true, data: 'Task created successfully.' });
+        }
+    });
+});
+
+app.get('/adminTasksList', function(req, res) {
+    Task.find(function(err, tasks) {
+        if (err) {
+            console.log('Error in getting tasks: ' + err);
+            return res.json({ success: false, data: 'Could not get tasks. Please try again.' });
+        } else {
+            console.log('Got tasks: ' + tasks);
+            return res.json({ success: true, data: tasks });
         }
     });
 });
