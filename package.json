@@ -20,6 +20,7 @@
     "fcm-node": "^1.1.1",
     "firebase-admin": "^4.2.1",
     "jade": "^1.11.0",
+    "jshint": "^2.9.5",
     "mongoose": "^4.9.5",
     "path": "^0.12.7",
     "serve-favicon": "^2.4.2",
@@ -33,7 +34,7 @@
     "staff",
     "manager",
     "ManageStaff",
-	  "StaffManager"
+    "StaffManager"
   ],
   "license": "MIT"
 }
