@@ -216,8 +216,8 @@ app.post('/createTask', function(req, res) {
         task_name: req.body.task_name,
         video_url: req.body.video_url,
         task_duration: req.body.task_duration,
-        task_status: 'Not Completed',
-        assigned_to: 'Click To Assign',
+        task_status: req.body.task_status,
+        assigned_to: req.body.assigned_to,
         notification_duration: req.body.notification_duration,
         created_on: req.body.created_on
     });
