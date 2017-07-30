@@ -41,7 +41,8 @@ var taskSchema = new mongoose.Schema({
     task_duration: { type: String },
     task_status: { type: String },
     assigned_to: { type: String },
-    notification_duration: { type: String }
+    notification_duration: { type: String },
+    created_on: { type: String }
 });
 
 var Task = mongoose.model('Task', taskSchema);
@@ -217,7 +218,8 @@ app.post('/createTask', function(req, res) {
         task_duration: req.body.task_duration,
         task_status: 'Not Completed',
         assigned_to: 'Click To Assign',
-        notification_duration: req.body.notification_duration
+        notification_duration: req.body.notification_duration,
+        created_on: req.body.created_on
     });
 
     task.save(function(err) {
