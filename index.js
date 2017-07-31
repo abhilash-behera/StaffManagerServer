@@ -30,7 +30,8 @@ var userSchema = new mongoose.Schema({
     username: { type: String, unique: true },
     password: { type: String },
     type: { type: String },
-    position: { type: String }
+    position: { type: String },
+    pending_tasks: { type: Number }
 });
 
 var User = mongoose.model('User', userSchema);
@@ -187,12 +188,26 @@ app.post('/createStaff', function(req, res) {
 });
 
 app.get('/staffList', function(req, res) {
-    User.find({ type: { $ne: 'admin' } }, { first_name: 1, last_name: 1, position: 1 }, function(err, users) {
+    User.find({ type: { $ne: 'admin' } }, { password: 0 }, function(err, users) {
         if (err) {
             logger.error('Error in getting staff list: ' + err);
-            res.status(209).json({ success: false, data: 'Could not get staff list at this moment. Please try again later.' });
+            return res.status(209).json({ success: false, data: 'Could not get staff list at this moment. Please try again later.' });
         } else {
-            res.json({ success: true, data: users });
+            if (users) {
+                for (var i = 0; i < users.length; i++) {
+                    Task.find({ assigned_to: users[i].username }, function(err, tasks) {
+                        if (err) {
+                            return res.status(209).json({ success: false, data: 'Could not get staff list at this moment. Please try again later.' });
+                        } else {
+                            users[i].pending_tasks = tasks.length;
+                        }
+                    });
+                }
+                return res.json({ success: true, data: users });
+            } else {
+                return res.status(209).json({ success: false, data: 'No users present.' });
+            }
+
         }
     });
 });
