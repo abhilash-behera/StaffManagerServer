@@ -194,22 +194,7 @@ app.get('/staffList', function(req, res) {
             logger.error('Error in getting staff list: ' + err);
             return res.status(209).json({ success: false, data: 'Could not get staff list at this moment. Please try again later.' });
         } else {
-            if (users) {
-                for (var i = 0; i < users.length; i++) {
-                    Task.find({ assigned_to: users[i].username }, function(err, tasks) {
-                        if (err) {
-                            return res.status(209).json({ success: false, data: 'Could not get staff list at this moment. Please try again later.' });
-                        } else {
-                            console.log('User: ' + users[i]);
-                            users[i].pending_tasks = tasks.length;
-                        }
-                    });
-                }
-                return res.json({ success: true, data: users });
-            } else {
-                return res.status(209).json({ success: false, data: 'No users present.' });
-            }
-
+            return res.json({ success: true, data: users });
         }
     });
 });
