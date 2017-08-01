@@ -200,6 +200,7 @@ app.get('/staffList', function(req, res) {
                         if (err) {
                             return res.status(209).json({ success: false, data: 'Could not get staff list at this moment. Please try again later.' });
                         } else {
+                            console.log('User: ' + users[i]);
                             users[i].pending_tasks = tasks.length;
                         }
                     });
