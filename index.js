@@ -173,7 +173,8 @@ app.post('/createStaff', function(req, res) {
         username: req.body.username,
         password: req.body.password,
         type: req.body.type,
-        position: req.body.position
+        position: req.body.position,
+        pending_tasks: 0
     });
 
     user.save(function(err) {
