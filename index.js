@@ -42,6 +42,7 @@ var taskSchema = new mongoose.Schema({
     task_duration: { type: String },
     task_status: { type: String },
     assigned_to: { type: String },
+    assigned_time: { type: String },
     notification_duration: { type: String },
     created_on: { type: String }
 });
@@ -243,6 +244,45 @@ app.get('/adminTasksList', function(req, res) {
         } else {
             console.log('Got tasks: ' + tasks);
             return res.json({ success: true, data: tasks });
+        }
+    });
+});
+
+app.post('/assignTask', function(req, res) {
+    User.findOne({ username: req.body.username }, function(err, user) {
+        if (err) {
+            return res.json({ success: false, data: 'Could not assign task at this moment. Please try again.' });
+        } else {
+            if (user) {
+                Task.findOne({ created_on: req.body.created_on }, function(err, task) {
+                    if (err) {
+                        return res.json({ success: false, data: 'Could not assign task at this moment. Please try again.' });
+                    } else {
+                        if (task) {
+                            task.assigned_to = req.body.username;
+                            task.assigned_time = req.body.timestamp;
+                            task.save(function(err) {
+                                if (err) {
+                                    return res.json({ success: false, data: 'Could not assign task at this moment. Please try again.' });
+                                } else {
+                                    user.pending_tasks = user.pending_tasks + 1;
+                                    user.save(function(err) {
+                                        if (err) {
+                                            return res.json({ success: false, data: 'Could not assign task at this moment. Please try again.' });
+                                        } else {
+                                            return res.json({ success: true, data: 'Task Assigned Successfully' });
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            return res.json({ success: false, data: 'Could not assign task at this moment. Please try again.' });
+                        }
+                    }
+                });
+            } else {
+                return res.json({ success: false, data: 'User not found. Please try again.' });
+            }
         }
     });
 });
