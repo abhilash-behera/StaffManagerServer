@@ -221,6 +221,7 @@ app.post('/createTask', function(req, res) {
         task_duration: req.body.task_duration,
         task_status: req.body.task_status,
         assigned_to: req.body.assigned_to,
+        assigned_time: '',
         notification_duration: req.body.notification_duration,
         created_on: req.body.created_on
     });
